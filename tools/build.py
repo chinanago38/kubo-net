@@ -8,8 +8,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = "https://xn--3owz62a.net"
 CSS_VER = "20261126n"
 AD = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1061443138303693" crossorigin="anonymous"></script>'
-NAV = [("米海軍の空母", "/us/"), ("ジョージ・ワシントン", "/us/gw/")]
-SECTION_NAME = {"us": ("米海軍の空母", "/us/")}
+NAV = [("米海軍の空母", "/us/"), ("ジョージ・ワシントン", "/us/gw/"), ("中国の空母", "/cn/")]
+SECTION_NAME = {"us": ("米海軍の空母", "/us/"), "cn": ("中国の空母", "/cn/")}
 
 def esc(s): return html.escape(s, quote=True)
 def strip(s): return re.sub(r"<[^>]+>", "", s).strip()
@@ -416,7 +416,7 @@ def unlink_missing(body):
     def rep(m):
         d, sl = m.group(1), m.group(2)
         return m.group(0) if complete(f"{d}__{sl}.html") else m.group(3)
-    return re.sub(r'<a href="/(us)/([a-z0-9]+)/"[^>]*>(.*?)</a>', rep, body)
+    return re.sub(r'<a href="/(us|cn)/([a-z0-9]+)/"[^>]*>(.*?)</a>', rep, body)
 
 def render(url, title, desc, body):
     body = unlink_missing(link_ships(url, body))
