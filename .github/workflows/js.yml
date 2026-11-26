@@ -1,0 +1,21 @@
+name: Fetch Joint Staff China carrier releases
+# 統合幕僚監部の「中国海軍艦艇の動向について」から空母の発表を取り込み、ページを作り直す
+on:
+  schedule:
+    - cron: "41 1,9 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get install -y -qq poppler-utils >/dev/null
+      - run: python3 tools/fetch_js.py
+      - run: python3 tools/build.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || (git commit -m "Update Joint Staff China carrier releases" && git pull --rebase origin main && git push)

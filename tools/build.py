@@ -270,6 +270,23 @@ def top_hero(body):
 SHIP_JA = {"CVN 68": "ニミッツ", "CVN 69": "ドワイト・D・アイゼンハワー", "CVN 70": "カール・ヴィンソン", "CVN 71": "セオドア・ルーズベルト",
            "CVN 72": "エイブラハム・リンカーン", "CVN 73": "ジョージ・ワシントン", "CVN 74": "ジョン・C・ステニス", "CVN 75": "ハリー・S・トルーマン",
            "CVN 76": "ロナルド・レーガン", "CVN 77": "ジョージ・H・W・ブッシュ", "CVN 78": "ジェラルド・R・フォード", "CVN 79": "ジョン・F・ケネディ"}
+def js_block(n=30):
+    import json
+    f = os.path.join(ROOT, "data", "js_china.json")
+    if not os.path.exists(f): return ""
+    d = json.load(open(f, encoding="utf-8"))
+    items = d.get("items", [])[:n]
+    if not items: return ""
+    rows = []
+    for i in items:
+        cs = "・".join(i.get("carriers") or ["空母"])
+        rows.append(f'<tr><td>{esc(i["date"])}</td><td>{esc(cs)}</td><td><a href="{esc(i["url"])}" target="_blank" rel="noopener">{esc(i["title"])}</a>'
+                    f'{"<br><small>" + esc(i["summary"]) + "</small>" if i.get("summary") else ""}</td></tr>')
+    upd = esc(d.get("updated", "").replace("T", " ").replace("Z", " UTC"))
+    return (f'<section class="block"><h2>統合幕僚監部の最新の発表（自動取得）</h2><p class="lead">防衛省・統合幕僚監部の報道発表資料「中国海軍艦艇の動向について」のうち、空母が出てくるものを1日2回自動で取り込んでいます。'
+            f'抜粋は発表資料の本文の最初の段落です。押すと防衛省の発表資料（PDF）が開きます。最終取得：{upd}</p>'
+            f'<div class="table-wrap"><table><tr><th>発表日</th><th>空母</th><th>発表（防衛省・統合幕僚監部）</th></tr>{"".join(rows)}</table></div></section>\n')
+
 def navy_block(n, heading):
     import json
     f = os.path.join(ROOT, "data", "navy_news.json")
@@ -446,6 +463,9 @@ def render(url, title, desc, body):
     crumb = " › ".join(f'<a href="{u}">{esc(t)}</a>' if u else esc(t) for t, u in crumbs)
     if url == "/":
         hero = top_hero(body) + navy_block(8, "米空母の最新の動き（米海軍の公式発表）") + photo_wall()
+    if url == "/cn/":
+        k = body.find('<h2>防衛省はどう見ているか</h2>')
+        body = body[:k] + '</section>' * 0 + js_block() + body[k:] if k >= 0 else body + js_block()
     if url == "/us/":
         body = body + navy_block(20, "米空母の最新の公式発表（navy.mil）")
     if url == "/calendar/":
