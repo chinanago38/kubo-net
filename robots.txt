@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://xn--3owz62a.net/sitemap.xml
