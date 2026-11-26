@@ -38,6 +38,31 @@ def fetch(url):
     with urllib.request.urlopen(req, timeout=40) as r:
         return r.read()
 
+MEDIA_NS = "{http://search.yahoo.com/mrss/}"
+def image_in(it):
+    # RSSの添付画像（enclosure / media:content / media:thumbnail）
+    for e in it.findall("enclosure"):
+        if (e.get("type") or "").startswith("image") or re.search(r"\.(jpe?g|png)$", e.get("url") or "", re.I):
+            return e.get("url")
+    for tag in ("content", "thumbnail"):
+        for e in it.iter(MEDIA_NS + tag):
+            if e.get("url"): return e.get("url")
+    m = re.search(r'<img[^>]+src="([^"]+)"', it.findtext("description") or "")
+    return m.group(1) if m else ""
+
+def og_image(link):
+    # RSSに画像がないときは記事ページの og:image（米海軍の公開写真）を使う
+    try:
+        page = fetch(link).decode("utf-8", "ignore")
+    except Exception:
+        return ""
+    m = re.search(r'<meta[^>]+property="og:image"[^>]+content="([^"]+)"', page) or \
+        re.search(r'<meta[^>]+content="([^"]+)"[^>]+property="og:image"', page)
+    return m.group(1) if m else ""
+
+def ok_img(u):
+    return bool(u) and u.startswith("https://") and bool(re.search(r"(navy\.mil|defense\.gov|dvidshub\.net)/", u))
+
 def main():
     try:
         old = {i["link"]: i for i in json.load(open(OUT, encoding="utf-8"))["items"]}
@@ -61,11 +86,22 @@ def main():
                 date = parsedate_to_datetime(it.findtext("pubDate")).astimezone(timezone.utc).strftime("%Y-%m-%d")
             except Exception:
                 date = ""
+            img = image_in(it)
+            if not ok_img(img):
+                img = old.get(link, {}).get("image", "")
+            if not ok_img(img):
+                img = og_image(link)
             old[link] = {"date": date, "title": title, "summary": desc, "link": link,
-                         "kind": kind, "ships": ships_in(title + " " + desc)}
+                         "kind": kind, "ships": ships_in(title + " " + desc),
+                         "image": img if ok_img(img) else ""}
     if ok == 0:
         print("no feed reachable; keeping existing data", file=sys.stderr)
         sys.exit(1)
+    # 以前に取り込んだ記事で画像がまだないものも補う
+    for it in old.values():
+        if it.get("ships") and not it.get("image"):
+            img = og_image(it["link"])
+            it["image"] = img if ok_img(img) else ""
     items = sorted(old.values(), key=lambda x: x["date"], reverse=True)[:300]
     data = {"updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
             "source": "U.S. Navy (navy.mil) official RSS", "items": items}

@@ -6,7 +6,7 @@ import glob, html, os, re, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = "https://xn--3owz62a.net"
-CSS_VER = "20261126a"
+CSS_VER = "20261126n"
 AD = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1061443138303693" crossorigin="anonymous"></script>'
 NAV = [("米海軍の空母", "/us/"), ("ジョージ・ワシントン", "/us/gw/")]
 SECTION_NAME = {"us": ("米海軍の空母", "/us/")}
@@ -277,14 +277,28 @@ def navy_block(n, heading):
     d = json.load(open(f, encoding="utf-8"))
     items = [i for i in d.get("items", []) if i.get("ships")][:n]
     if not items: return ""
-    rows = []
+    jf = os.path.join(ROOT, "data", "navy_ja.json")
+    ja = json.load(open(jf, encoding="utf-8")) if os.path.exists(jf) else {}
+    gw = photo_for("/us/gw/")
+    cards = []
     for i in items:
         ships = "・".join(f"{SHIP_JA.get(h, h)}（{h}）" for h in i["ships"])
-        rows.append(f'<tr><td>{esc(i["date"])}</td><td>{esc(ships)}</td><td><a href="{esc(i["link"])}" target="_blank" rel="noopener">{esc(html.unescape(i["title"]))}</a></td></tr>')
+        en = html.unescape(i["title"])
+        jt = ja.get(i["link"], "")
+        img = i.get("image", "")
+        if img:
+            pic = f'<img src="{esc(img)}" alt="{esc(jt or en)}" loading="lazy" decoding="async"><span class="credit">写真：U.S. Navy</span>'
+        elif gw and "CVN 73" in i["ships"]:
+            pic = f'<img src="{esc(gw[1])}" alt="{esc(gw[6])}" loading="lazy" decoding="async"><span class="credit">参考写真：{esc(gw[3])} / {esc(gw[4])}</span>'
+        else:
+            pic = '<span class="noimg">⚓</span>'
+        title = f'<b>{esc(jt)}</b><small class="en">原文：{esc(en)}</small>' if jt else f'<b>{esc(en)}</b><small class="en">日本語訳は準備中</small>'
+        cards.append(f'<a class="news-card" href="{esc(i["link"])}" target="_blank" rel="noopener"><div class="pic">{pic}</div>'
+                     f'<div class="txt"><span class="meta">{esc(i["date"])}　{esc(ships)}</span>{title}</div></a>')
     upd = esc(d.get("updated", "").replace("T", " ").replace("Z", " UTC"))
     return (f'<section class="block"><h2>{esc(heading)}</h2><p class="lead">米海軍の公式サイト（navy.mil）のニュースのうち、空母に関係するものを6時間ごとに自動で取り込んでいます。'
-            f'見出しは原文（英語）のままで、押すと米海軍の記事が開きます。日付は米国東部時間の配信日です。最終取得：{upd}</p>'
-            f'<div class="table-wrap"><table><tr><th>日付</th><th>空母</th><th>米海軍の発表（原文）</th></tr>{"".join(rows)}</table></div></section>\n')
+            f'見出しの日本語は当サイトによる訳で、下に英語の原文を載せています。押すと米海軍の記事（英語）が開きます。日付は配信日です。最終取得：{upd}</p>'
+            f'<div class="news-list">{"".join(cards)}</div></section>\n')
 
 def next_events():
     f = os.path.join(ROOT, "tools", "content", "calendar.html")
