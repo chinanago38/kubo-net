@@ -280,7 +280,7 @@ def js_block(n=30):
     rows = []
     for i in items:
         cs = "・".join(i.get("carriers") or ["空母"])
-        rows.append(f'<tr><td>{esc(i["date"])}</td><td>{esc(cs)}</td><td><a href="{esc(i["url"])}" target="_blank" rel="noopener">{esc(i["title"])}</a>'
+        rows.append(f'<tr><td>{esc(i["date"])}</td><td>{esc(cs)}</td><td><a href="{esc(i["url"])}" target="_blank" rel="noopener">{esc(re.sub(r"^\d{4}年\d{2}月\d{2}日公表", "", i["title"]))}</a>'
                     f'{"<br><small>" + esc(i["summary"]) + "</small>" if i.get("summary") else ""}</td></tr>')
     upd = esc(d.get("updated", "").replace("T", " ").replace("Z", " UTC"))
     return (f'<section class="block"><h2>統合幕僚監部の最新の発表（自動取得）</h2><p class="lead">防衛省・統合幕僚監部の報道発表資料「中国海軍艦艇の動向について」のうち、空母が出てくるものを1日2回自動で取り込んでいます。'
@@ -463,15 +463,17 @@ def render(url, title, desc, body):
     crumb = " › ".join(f'<a href="{u}">{esc(t)}</a>' if u else esc(t) for t, u in crumbs)
     if url == "/":
         hero = top_hero(body) + navy_block(8, "米空母の最新の動き（米海軍の公式発表）") + photo_wall()
-    if url == "/cn/":
-        k = body.find('<h2>防衛省はどう見ているか</h2>')
-        body = body[:k] + '</section>' * 0 + js_block() + body[k:] if k >= 0 else body + js_block()
-    if url == "/us/":
-        body = body + navy_block(20, "米空母の最新の公式発表（navy.mil）")
     if url == "/calendar/":
         body = link_garrisons(archive_rows(body))
     body = ul_to_cards(body)
     main = (f'  <div class="crumb">{crumb}</div>\n' if url != "/" else "") + hero + insert_after_first_section(blockify(wrap_tables(body)), figure_for(url))
+    if url == "/cn/":
+        k = main.find('<section class="block"><h2>防衛省はどう見ているか')
+        main = main[:k] + js_block() + main[k:] if k >= 0 else main + js_block()
+    if url == "/us/":
+        k = main.find('<section class="sources block">')
+        nb = navy_block(20, "米空母の最新の公式発表（navy.mil）")
+        main = main[:k] + nb + main[k:] if k >= 0 else main + nb
     if gal:
         j = main.find('<section class="sources block">')
         main = main[:j] + gal + main[j:] if j >= 0 else main + gal
