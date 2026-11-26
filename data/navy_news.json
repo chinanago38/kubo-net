@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T01:35Z",
+ "updated": "2026-11-26T04:45Z",
  "source": "U.S. Navy (navy.mil) official RSS",
  "items": [
   {
@@ -10,7 +10,8 @@
    "kind": "news",
    "ships": [
     "CVN 73"
-   ]
+   ],
+   "image": "https://media.defense.gov/2026/Nov/20/2004037068/600/400/0/261120-N-UM953-1072.JPG"
   },
   {
    "date": "2026-11-09",
@@ -20,7 +21,8 @@
    "kind": "news",
    "ships": [
     "CVN 68"
-   ]
+   ],
+   "image": "https://media.defense.gov/2026/Nov/09/2004025278/600/400/0/261104-N-XJ164-1129.JPG"
   },
   {
    "date": "2026-11-02",
@@ -30,7 +32,8 @@
    "kind": "news",
    "ships": [
     "CVN 73"
-   ]
+   ],
+   "image": "https://media.defense.gov/2026/Nov/02/2004021914/600/400/0/261012-N-NO146-1063.JPG"
   },
   {
    "date": "2026-10-19",
@@ -40,7 +43,8 @@
    "kind": "news",
    "ships": [
     "CVN 72"
-   ]
+   ],
+   "image": "https://media.defense.gov/2026/Oct/08/2004013834/600/400/0/261008-N-DE539-1029.JPG"
   },
   {
    "date": "2026-10-16",
@@ -50,7 +54,8 @@
    "kind": "news",
    "ships": [
     "CVN 71"
-   ]
+   ],
+   "image": "https://media.defense.gov/2026/Oct/16/2004015537/600/400/0/261016-N-ZS816-1113.JPG"
   },
   {
    "date": "2026-10-15",
@@ -58,7 +63,8 @@
    "summary": "SAN DIEGO &mdash; Ticonderoga-class guided-missile cruiser USS Robert Smalls (CG 62) arrived at its new homeport of Naval Base San Diego, following a 7-month deployment supporting U.S. 7th Fleet operations, including two carrier strike groups in the Pacific, Oct. 9.",
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4626121/uss-robert-smalls-returns-to-san-diego-after-a-7-month-deployment/",
    "kind": "news",
-   "ships": []
+   "ships": [],
+   "image": "https://media.defense.gov/2026/Oct/14/2004015119/600/400/0/261010-D-N0831-4383.JPG"
   },
   {
    "date": "2026-10-09",
@@ -68,7 +74,8 @@
    "kind": "news",
    "ships": [
     "CVN 77"
-   ]
+   ],
+   "image": "https://media.defense.gov/2026/Oct/09/2004013907/600/400/0/261009-N-NO824-1005.JPG"
   },
   {
    "date": "2026-10-09",
@@ -78,7 +85,8 @@
    "kind": "news",
    "ships": [
     "CVN 72"
-   ]
+   ],
+   "image": "https://media.defense.gov/2026/Oct/08/2004013833/600/400/0/261008-N-DE539-1069.JPG"
   },
   {
    "date": "2026-10-08",
@@ -86,7 +94,8 @@
    "summary": "During its first underway period since completing a homeport shift to Norfolk, Va. in July,",
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4621995/nimitz-completes-flight-deck-certification/",
    "kind": "news",
-   "ships": []
+   "ships": [],
+   "image": "https://media.defense.gov/2026/Oct/08/2004013309/600/400/0/261006-N-AW546-1024.JPG"
   },
   {
    "date": "2026-10-03",
@@ -96,7 +105,8 @@
    "kind": "news",
    "ships": [
     "CVN 77"
-   ]
+   ],
+   "image": "https://media.defense.gov/2026/Oct/03/2004010933/600/400/0/261004-N-FX026-1129.JPG"
   },
   {
    "date": "2026-10-01",
@@ -106,7 +116,8 @@
    "kind": "news",
    "ships": [
     "CVN 75"
-   ]
+   ],
+   "image": "https://media.defense.gov/2026/Sep/30/2004009133/600/400/0/260930-N-SB024-4635.JPG"
   },
   {
    "date": "2026-09-29",
@@ -116,7 +127,8 @@
    "kind": "news",
    "ships": [
     "CVN 69"
-   ]
+   ],
+   "image": ""
   },
   {
    "date": "2026-09-21",
@@ -126,7 +138,8 @@
    "kind": "news",
    "ships": [
     "CVN 72"
-   ]
+   ],
+   "image": "https://media.defense.gov/2026/Sep/21/2004004565/600/400/0/260919-N-XR642-1048.JPG"
   }
  ]
 }
