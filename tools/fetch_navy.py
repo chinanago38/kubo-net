@@ -26,7 +26,10 @@ def clean(s):
 def ships_in(text):
     found = []
     for hull, name in CARRIERS.items():
-        if name.lower() in text.lower() or re.search(hull.replace(" ", r"[- ]?"), text, re.I):
+        n = hull.split()[1]
+        if re.search(r"\bUSS " + re.escape(name) + r"\b(?!-class)", text, re.I) or \
+           re.search(r"\b" + re.escape(name) + r" (Carrier Strike Group|CSG)", text, re.I) or \
+           re.search(r"\bCVN[- ]?" + n + r"\b", text, re.I):
             found.append(hull)
     return found
 

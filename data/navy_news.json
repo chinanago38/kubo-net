@@ -9,7 +9,6 @@
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4658103/us-ambassador-visits-uss-george-washington/",
    "kind": "news",
    "ships": [
-    "CVN 68",
     "CVN 73"
    ]
   },
@@ -30,7 +29,6 @@
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4639011/uss-george-washington-sailors-cast-their-votes-while-deployed/",
    "kind": "news",
    "ships": [
-    "CVN 68",
     "CVN 73"
    ]
   },
@@ -41,7 +39,6 @@
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4628279/uss-abraham-lincoln-to-shift-home-port-to-bremerton/",
    "kind": "news",
    "ships": [
-    "CVN 68",
     "CVN 72"
    ]
   },
@@ -52,7 +49,6 @@
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4627146/uss-theodore-roosevelt-arrives-in-yokosuka/",
    "kind": "news",
    "ships": [
-    "CVN 68",
     "CVN 71"
    ]
   },
@@ -71,7 +67,6 @@
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4623363/george-hw-bush-carrier-strike-group-departs-thailand/",
    "kind": "news",
    "ships": [
-    "CVN 68",
     "CVN 77"
    ]
   },
@@ -91,9 +86,7 @@
    "summary": "During its first underway period since completing a homeport shift to Norfolk, Va. in July,",
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4621995/nimitz-completes-flight-deck-certification/",
    "kind": "news",
-   "ships": [
-    "CVN 68"
-   ]
+   "ships": []
   },
   {
    "date": "2026-10-03",
@@ -102,7 +95,6 @@
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4619041/george-hw-bush-carrier-strike-group-arrives-in-thailand/",
    "kind": "news",
    "ships": [
-    "CVN 68",
     "CVN 77"
    ]
   },
@@ -113,7 +105,6 @@
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4616442/uss-harry-s-truman-departs-norfolk-begins-move-to-newport-news-for-rcoh/",
    "kind": "news",
    "ships": [
-    "CVN 68",
     "CVN 75"
    ]
   },
@@ -134,7 +125,6 @@
    "link": "https://www.navy.mil/Press-Office/News-Stories/display-news/Article/4607097/uss-abraham-lincoln-cvn-72-uss-frank-e-petersen-jr-ddg-121-arrive-in-guam/",
    "kind": "news",
    "ships": [
-    "CVN 68",
     "CVN 72"
    ]
   }
