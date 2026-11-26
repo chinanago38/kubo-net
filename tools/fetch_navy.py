@@ -7,7 +7,6 @@ from email.utils import parsedate_to_datetime
 
 FEEDS = {
     "news": "https://www.navy.mil/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=1067&max=100",
-    "press": "https://www.navy.mil/DesktopModules/ArticleCS/RSS.ashx?ContentType=9&Site=1067&max=50",
 }
 CARRIERS = {
     "CVN 68": "Nimitz", "CVN 69": "Dwight D. Eisenhower", "CVN 70": "Carl Vinson",
@@ -67,6 +66,7 @@ def main():
     items = sorted(old.values(), key=lambda x: x["date"], reverse=True)[:300]
     data = {"updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
             "source": "U.S. Navy (navy.mil) official RSS", "items": items}
+    os.makedirs(os.path.dirname(OUT), exist_ok=True)
     tmp = OUT + ".tmp"
     json.dump(data, open(tmp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     os.replace(tmp, OUT)
