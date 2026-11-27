@@ -2,11 +2,14 @@
 """空母.net のページを tools/content/*.html から生成する。
 ファイル名 <dir>__<slug>.html → /<dir>/<slug>/、<dir>__index.html → /<dir>/、<name>.html → /<name>/、index.html → /
 1行目 title、2行目 description、3行目以降 本文（h1・p.updated・h2 …・section.sources）。"""
-import glob, html, os, re, datetime
+import sys, glob, html, os, re, datetime
 
+sys.dont_write_bytecode = True
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import sections
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = "https://xn--3owz62a.net"
-CSS_VER = "20261127j"
+CSS_VER = "20261127l"
 AD = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1061443138303693" crossorigin="anonymous"></script>'
 NAV = [("米海軍の空母", "/us/"), ("ジョージ・ワシントン", "/us/gw/"), ("中国の空母", "/cn/")]
 SECTION_NAME = {"us": ("米海軍の空母", "/us/"), "cn": ("中国の空母", "/cn/")}
@@ -500,6 +503,7 @@ def render(url, title, desc, body):
     if gal:
         j = main.find('<section class="sources block">')
         main = main[:j] + gal + main[j:] if j >= 0 else main + gal
+    main = sections.insert(url, main)
     nav = "".join(f'<a href="{u}">{t}</a>' for t, u in NAV if os.path.exists(os.path.join(ROOT, u.strip("/"), "index.html")) )
     return f"""<!DOCTYPE html>
 <html lang="ja">
