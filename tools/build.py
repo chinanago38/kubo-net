@@ -6,7 +6,7 @@ import glob, html, os, re, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = "https://xn--3owz62a.net"
-CSS_VER = "20261127i"
+CSS_VER = "20261127j"
 AD = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1061443138303693" crossorigin="anonymous"></script>'
 NAV = [("米海軍の空母", "/us/"), ("ジョージ・ワシントン", "/us/gw/"), ("中国の空母", "/cn/")]
 SECTION_NAME = {"us": ("米海軍の空母", "/us/"), "cn": ("中国の空母", "/cn/")}
@@ -280,7 +280,7 @@ def link_ships(url, body):
     return re.sub(r"<td>([ぁ-ん]+)</td>", rep, body)
 
 def top_hero(body):
-    return (f'<section class="tophero art art-br art-compact"><img class="art-img" src="/assets/hero.webp?v=1127" alt="ちんあなご編集部のキャラクター" width="1344" height="752" fetchpriority="high">'
+    return (f'<section class="tophero art art-br art-compact"><img class="art-img" style="display:block;width:100%;max-width:100%;height:auto" src="/assets/hero.webp?v=1127" alt="ちんあなご編集部のキャラクター" width="1344" height="752" fetchpriority="high">'
             f'<div class="inner"><p class="kicker">世界の空母（航空母艦）情報</p>'
             f'<h1>いま、空母は<br>どこで何をしている？</h1><p class="lead">米海軍などの公式発表から、空母の最新の動きと基本情報をまとめています。6時間ごとに米海軍の公式ニュースを自動で取り込みます。</p>'
             f'<div class="cta"><a class="btn" href="/us/">米海軍の空母一覧</a><a class="btn ghost" href="/us/gw/">横須賀のジョージ・ワシントン</a></div></div></section>\n')
