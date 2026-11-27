@@ -6,7 +6,7 @@ import glob, html, os, re, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN = "https://xn--3owz62a.net"
-CSS_VER = "20261126n"
+CSS_VER = "20261127h"
 AD = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1061443138303693" crossorigin="anonymous"></script>'
 NAV = [("米海軍の空母", "/us/"), ("ジョージ・ワシントン", "/us/gw/"), ("中国の空母", "/cn/")]
 SECTION_NAME = {"us": ("米海軍の空母", "/us/"), "cn": ("中国の空母", "/cn/")}
@@ -257,15 +257,10 @@ def link_ships(url, body):
     return re.sub(r"<td>([ぁ-ん]+)</td>", rep, body)
 
 def top_hero(body):
-    global PHOTOS
-    if PHOTOS is None: PHOTOS = load_photos(); dedupe_photos()
-    ph = PHOTOS.get("/us/gw/") or next((PHOTOS[u] for u in sorted(PHOTOS)), None)
-    bg = f' style="background-image:linear-gradient(180deg,rgba(6,22,44,.55),rgba(6,22,44,.88)),url({esc(ph[1])})"' if ph else ""
-    credit = (f'<p class="credit">写真：{esc(ph[6])} {esc(ph[3])} / <a href="{esc(ph[5])}" rel="noopener license" target="_blank">{esc(ph[4])}</a>'
-              f'（<a href="{esc(ph[2])}" rel="noopener" target="_blank">Wikimedia Commons</a>）</p>') if ph else ""
-    return (f'<section class="tophero"{bg}><div class="inner"><p class="kicker">世界の空母（航空母艦）情報</p>'
+    return (f'<section class="tophero art art-br art-compact"><img class="art-img" src="/assets/hero.webp?v=1127" alt="ちんあなご編集部のキャラクター" width="1344" height="752" fetchpriority="high">'
+            f'<div class="inner"><p class="kicker">世界の空母（航空母艦）情報</p>'
             f'<h1>いま、空母は<br>どこで何をしている？</h1><p class="lead">米海軍などの公式発表から、空母の最新の動きと基本情報をまとめています。6時間ごとに米海軍の公式ニュースを自動で取り込みます。</p>'
-            f'<div class="cta"><a class="btn" href="/us/">米海軍の空母一覧</a><a class="btn ghost" href="/us/gw/">横須賀のジョージ・ワシントン</a></div></div>{credit}</section>\n')
+            f'<div class="cta"><a class="btn" href="/us/">米海軍の空母一覧</a><a class="btn ghost" href="/us/gw/">横須賀のジョージ・ワシントン</a></div></div></section>\n')
 
 SHIP_JA = {"CVN 68": "ニミッツ", "CVN 69": "ドワイト・D・アイゼンハワー", "CVN 70": "カール・ヴィンソン", "CVN 71": "セオドア・ルーズベルト",
            "CVN 72": "エイブラハム・リンカーン", "CVN 73": "ジョージ・ワシントン", "CVN 74": "ジョン・C・ステニス", "CVN 75": "ハリー・S・トルーマン",
