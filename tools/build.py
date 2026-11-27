@@ -264,7 +264,7 @@ def top_hero(body):
     credit = (f'<p class="credit">写真：{esc(ph[6])} {esc(ph[3])} / <a href="{esc(ph[5])}" rel="noopener license" target="_blank">{esc(ph[4])}</a>'
               f'（<a href="{esc(ph[2])}" rel="noopener" target="_blank">Wikimedia Commons</a>）</p>') if ph else ""
     return (f'<section class="tophero"{bg}><div class="inner"><p class="kicker">世界の空母（航空母艦）情報</p>'
-            f'<h1>いま、空母は<br>どこで何をしている？</h1><p class="lead">米海軍などの公式発表から、空母の最新の動きと基本情報をまとめています。6時間ごとに米海軍の公式ニュースを自動で取り込みます。個人運営の非公式サイトです。</p>'
+            f'<h1>いま、空母は<br>どこで何をしている？</h1><p class="lead">米海軍などの公式発表から、空母の最新の動きと基本情報をまとめています。6時間ごとに米海軍の公式ニュースを自動で取り込みます。</p>'
             f'<div class="cta"><a class="btn" href="/us/">米海軍の空母一覧</a><a class="btn ghost" href="/us/gw/">横須賀のジョージ・ワシントン</a></div></div>{credit}</section>\n')
 
 SHIP_JA = {"CVN 68": "ニミッツ", "CVN 69": "ドワイト・D・アイゼンハワー", "CVN 70": "カール・ヴィンソン", "CVN 71": "セオドア・ルーズベルト",
@@ -503,7 +503,7 @@ def render(url, title, desc, body):
 {main}</div></main>
 
 <footer class="site"><div class="wrap">
-  <p>空母.net は、世界の空母（航空母艦）の情報を各国海軍などの公式発表からまとめた個人運営の情報サイトです。米海軍・防衛省・各国政府の公式サイトではありません。</p>
+  <p>空母.net は、世界の空母（航空母艦）の情報を各国海軍などの公式発表からまとめた情報サイトです。米海軍・防衛省・各国政府とは関係のない、ちんあなご編集部のサイトです。</p>
   <p>{" ・ ".join(f'<a href="{u}">{t}</a>' for t, u in [("トップ", "/")] + NAV)}</p>
   <p><a href="/operator/">運営者情報</a> ・ <a href="/editorial-policy/">編集方針</a> ・ <a href="/contact/">お問い合わせ</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/disclaimer/">免責事項</a></p>
   <p>© 2026 空母.net</p>
